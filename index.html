@@ -15,7 +15,7 @@
     function myFunction() {
       var iframe = document.getElementById("myFrame");
       var iframeContent = iframe.contentDocument || iframe.contentWindow.document;
-      var elements = iframeContent.getElementsByClassName("app-name");
+      var elements = iframeContent.getElementsByClassName("embedding-footer layout-align-end-end layout-row ng-star-inserted");
 
       if (elements.length > 0) {
         var appNameElement = elements[0];
