@@ -12,13 +12,18 @@
   <script>
     function hideElementsInIframe() {
       var iframe = document.getElementById('myFrame');
-      var iframeContent = iframe.contentDocument || iframe.contentWindow.document;
-      
-      var elementsToHide = iframeContent.querySelectorAll('.privacy-link, .app-name, .fullscreen-icon');
-      for (var i = 0; i < elementsToHide.length; i++) {
-        elementsToHide[i].style.display = 'none';
-      }
+      iframe.contentWindow.postMessage('hideElements', '*');
     }
+
+    window.addEventListener('message', function(event) {
+      if (event.data === 'hideElements') {
+        var iframeContent = document.getElementById('myFrame').contentDocument;
+        var elementsToHide = iframeContent.querySelectorAll('.privacy-link, .app-name, .fullscreen-icon');
+        for (var i = 0; i < elementsToHide.length; i++) {
+          elementsToHide[i].style.display = 'none';
+        }
+      }
+    });
   </script>
 </head>
 <body onload="hideElementsInIframe()">
