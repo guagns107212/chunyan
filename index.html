@@ -3,25 +3,34 @@
 <head>
   <title>千陽報表</title>
   <style>
-    ._ngcontent-ng-c1187943658 {
+    .app-name {
       display: none;
     }
   </style>
 </head>
 <body>
-  <iframe onload="myFunction()" id="myFrame" width="100%" height="1000" src="https://lookerstudio.google.com/embed/reporting/d143bc60-95c4-4fe4-807f-ae07acc9e310/page/MslUD" frameborder="0" style="border:0" ></iframe>
+  <iframe id="myFrame" width="100%" height="1000" src="https://lookerstudio.google.com/embed/reporting/d143bc60-95c4-4fe4-807f-ae07acc9e310/page/MslUD" frameborder="0" style="border:0"></iframe>
 
   <script>
-    function myFunction() {
-      var iframe = document.getElementById("myFrame");
-      var iframeContent = iframe.contentDocument || iframe.contentWindow.document;
-      var elements = iframeContent.getElementsByClassName("_ngcontent-ng-c1187943658");
+    var iframe = document.getElementById("myFrame");
 
-      if (elements.length > 0) {
-        var targetElement = elements[0];
-        targetElement.style.display = "none";
-      }
-    }
+    iframe.onload = function() {
+      var iframeContent = iframe.contentDocument || iframe.contentWindow.document;
+
+      var observer = new MutationObserver(function(mutationsList) {
+        mutationsList.forEach(function(mutation) {
+          var elements = iframeContent.getElementsByClassName("app-name");
+
+          if (elements.length > 0) {
+            var targetElement = elements[0];
+            targetElement.style.display = "none";
+            observer.disconnect(); // Stop observing once the element is hidden
+          }
+        });
+      });
+
+      observer.observe(iframeContent, { childList: true, subtree: true });
+    };
   </script>
 </body>
 </html>
