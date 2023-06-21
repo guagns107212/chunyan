@@ -19,10 +19,9 @@
 
       var observer = new MutationObserver(function(mutationsList) {
         mutationsList.forEach(function(mutation) {
-          var elements = iframeContent.getElementsByTagName("_ngcontent-ng-c1187943658");
+          var targetElement = iframeContent.querySelector("[_ngcontent-ng-c1187943658]");
 
-          if (elements.length > 0) {
-            var targetElement = elements[0];
+          if (targetElement) {
             targetElement.style.display = "none";
             observer.disconnect(); // Stop observing once the element is hidden
           }
