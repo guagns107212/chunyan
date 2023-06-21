@@ -3,7 +3,7 @@
 <head>
   <title>千陽報表</title>
   <style>
-    .app-name {
+    ._ngcontent-ng-c1187943658 {
       display: none;
     }
   </style>
@@ -15,11 +15,11 @@
     function myFunction() {
       var iframe = document.getElementById("myFrame");
       var iframeContent = iframe.contentDocument || iframe.contentWindow.document;
-      var elements = iframeContent.getElementsByTagName("_ngcontent-ng-c1187943658");
+      var elements = iframeContent.getElementsByClassName("_ngcontent-ng-c1187943658");
 
       if (elements.length > 0) {
-        var grammarlyElement = elements[0];
-        grammarlyElement.style.display = "none";
+        var targetElement = elements[0];
+        targetElement.style.display = "none";
       }
     }
   </script>
