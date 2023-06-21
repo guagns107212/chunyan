@@ -2,29 +2,26 @@
 <html>
 <head>
   <title>千陽報表</title>
-</head>
-<body>
-  <iframe id="myFrame" width="100%" height="1000" src="https://lookerstudio.google.com/embed/reporting/d143bc60-95c4-4fe4-807f-ae07acc9e310/page/MslUD" frameborder="0" style="border:0"></iframe>
-
+  <style>
+    #myFrame {
+      width: 100%;
+      height: 1000px;
+      border: 0;
+    }
+  </style>
   <script>
-    var iframe = document.getElementById("myFrame");
-
-    iframe.onload = function() {
+    function hideElementsInIframe() {
+      var iframe = document.getElementById('myFrame');
       var iframeContent = iframe.contentDocument || iframe.contentWindow.document;
-
-      var observer = new MutationObserver(function(mutationsList) {
-        mutationsList.forEach(function(mutation) {
-          var targetElement = iframeContent.querySelector("[_ngcontent-ng-c1187943658]");
-
-          if (targetElement) {
-            targetElement.style.display = "none";
-            observer.disconnect(); // Stop observing once the element is hidden
-          }
-        });
-      });
-
-      observer.observe(iframeContent, { childList: true, subtree: true });
-    };
+      
+      var elementsToHide = iframeContent.querySelectorAll('.privacy-link, .app-name, .fullscreen-icon');
+      for (var i = 0; i < elementsToHide.length; i++) {
+        elementsToHide[i].style.display = 'none';
+      }
+    }
   </script>
+</head>
+<body onload="hideElementsInIframe()">
+  <iframe id="myFrame" src="https://lookerstudio.google.com/embed/reporting/d143bc60-95c4-4fe4-807f-ae07acc9e310/page/MslUD"></iframe>
 </body>
 </html>
