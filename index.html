@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>千陽報表</title>
   <style>
     #myFrame {
       width: 100%;
@@ -12,18 +11,16 @@
   <script>
     function hideElementsInIframe() {
       var iframe = document.getElementById('myFrame');
-      iframe.contentWindow.postMessage('hideElements', '*');
-    }
-
-    window.addEventListener('message', function(event) {
-      if (event.data === 'hideElements') {
-        var iframeContent = document.getElementById('myFrame').contentDocument;
-        var elementsToHide = iframeContent.querySelectorAll('.privacy-link, .app-name, .fullscreen-icon');
-        for (var i = 0; i < elementsToHide.length; i++) {
-          elementsToHide[i].style.display = 'none';
+      var customCss = `
+        .privacy-link, .app-name, .fullscreen-icon {
+          display: none !important;
         }
-      }
-    });
+      `;
+      var iframeContent = iframe.contentWindow.document;
+      var styleElement = iframeContent.createElement('style');
+      styleElement.innerHTML = customCss;
+      iframeContent.head.appendChild(styleElement);
+    }
   </script>
 </head>
 <body onload="hideElementsInIframe()">
